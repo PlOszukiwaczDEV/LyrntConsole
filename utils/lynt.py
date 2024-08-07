@@ -1,6 +1,6 @@
 import requests
 import os
-import headers
+import utils.headers
 import json
 from dotenv import load_dotenv
 
@@ -30,7 +30,7 @@ def send_lynt(message: str, repostID: int = None):
         data['reposted'] = repostID
 
     # Send the POST request
-    r = requests.post("https://lyntr.com/api/lynt", data=data, headers=headers.lynt_headers, cookies=cookies)
+    r = requests.post("https://lyntr.com/api/lynt", data=data, headers=utils.headers.lynt_headers, cookies=cookies)
     return r
 def like_lynt(lyntID : int):
     """
@@ -41,7 +41,7 @@ def like_lynt(lyntID : int):
         "lyntId": lyntID
     })
 
-    r = requests.post('https://lyntr.com/api/likelynt', cookies=cookies, headers=headers.like_lynt_headers, data=data)
+    r = requests.post('https://lyntr.com/api/likelynt', cookies=cookies, headers=utils.headers.like_lynt_headers, data=data)
     return r
 def delete_lynt(lyntID : int):
     """
@@ -51,7 +51,7 @@ def delete_lynt(lyntID : int):
         'id': lyntID
     }
 
-    r = requests.delete('https://lyntr.com/api/lynt', params=params, cookies=cookies, headers=headers.delete_lynt_headers)
+    r = requests.delete('https://lyntr.com/api/lynt', params=params, cookies=cookies, headers=utils.headers.delete_lynt_headers)
     return r
 def comment_lynt(lyntID : int, commment : str):
     """
@@ -63,11 +63,11 @@ def comment_lynt(lyntID : int, commment : str):
         'content': commment
     })
 
-    r = requests.post('https://lyntr.com/api/comment', cookies=cookies, headers=headers.comment_lynt_headers, data=data)
+    r = requests.post('https://lyntr.com/api/comment', cookies=cookies, headers=utils.headers.comment_lynt_headers, data=data)
     return r
 def get_lynt(lyntID : int):
-    r = requests.get(f"https://lyntr.com/api/lynt?id={lyntID}", cookies=cookies, headers=headers.get_lynt_headers)
+    r = requests.get(f"https://lyntr.com/api/lynt?id={lyntID}", cookies=cookies, headers=utils.headers.get_lynt_headers)
     return r
 def get_comments_lynt(lyntID : int):
-    r = requests.get(f"https://lyntr.com/api/comments?id={lyntID}", cookies=cookies, headers=headers.get_lynt_headers)
+    r = requests.get(f"https://lyntr.com/api/comments?id={lyntID}", cookies=cookies, headers=utils.headers.get_lynt_headers)
     return r
